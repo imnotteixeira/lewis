@@ -1,0 +1,10 @@
+version: "3"
+services:
+  lewis-dev:
+    build:
+      context: .
+    volumes:
+      - ./src:/usr/src/lewis/src
+      - ./public:/usr/src/lewis/public
+    ports:
+      - 8080:8080
