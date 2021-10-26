@@ -4,8 +4,7 @@
         "es2021": true
     },
     "extends": [
-        "plugin:react/recommended",
-        "airbnb"
+        "plugin:react/recommended"
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
@@ -18,13 +17,17 @@
     "plugins": [
         "react",
         "react-hooks",
-        "@typescript-eslint"
+        "@typescript-eslint",
+        "import"
     ],
     "rules": {
+        "semi": "off",
+        "@typescript-eslint/semi": ["error"],
         "no-use-before-define": "off",
         "@typescript-eslint/no-use-before-define": ["error"],
         "react/jsx-filename-extension": [ "warn", {"extensions": [".tsx"]} ],
         "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
+        "import/extensions": "off",
 
         "no-misleading-character-class": "error",
         "no-template-curly-in-string": "error",
@@ -70,7 +73,6 @@
         "object-curly-spacing": ["error", "always"],
         "prefer-object-spread": "error",
         "quotes": ["error", "double", { "avoidEscape": true }],
-        "semi": ["error", "always", { "omitLastInOneLineBlock": true }],
         "semi-spacing": ["error", { "before": false, "after": true }],
         "space-before-blocks": ["error", "always"],
         "space-before-function-paren": ["error", {
@@ -137,5 +139,15 @@
         // React Hooks
         "react-hooks/rules-of-hooks": "error",
         "react-hooks/exhaustive-deps": "warn"
-    }
+    },
+    "settings": {
+        "import/parsers": {
+          "@typescript-eslint/parser": [".ts", ".tsx"]
+        },
+        "import/resolver": {
+          "typescript": {
+            "alwaysTryTypes": true
+          }
+        }
+    },
 }

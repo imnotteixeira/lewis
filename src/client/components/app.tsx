@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 
 const App: React.FC<{ compiler: string, framework: string }> = (props) => (
     <div>
-        Lewis
+        Lewises
         <div>
             {props.compiler}
         </div>
