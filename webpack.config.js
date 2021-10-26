@@ -6,7 +6,7 @@ module.exports = {
     entry: "./src/client/components/app.tsx",
     devServer: {
         static: {
-            directory: path.join(__dirname, "public"),
+            directory: path.join(__dirname, "public/static"),
         },
         port: 8080,
         host: "0.0.0.0",
@@ -14,11 +14,11 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             template: "public/index.html",
-        }),
+        })
     ],
     output: {
-        path: `${__dirname}/public`,
-        filename: "build/[name].[contenthash].js",
+        path: `${__dirname}/dist`,
+        filename: "[name].[contenthash].js",
         clean: true,
     },
     resolve: {
@@ -27,6 +27,10 @@ module.exports = {
     module: {
         rules: [
             { test: /\.tsx?$/, loader: "ts-loader" },
+            {
+                test: /\.(png|svg|jpg|jpeg|gif)$/i,
+                type: 'asset/resource',
+            },
         ],
     },
 };
