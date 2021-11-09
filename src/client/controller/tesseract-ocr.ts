@@ -1,14 +1,19 @@
-import { createWorker, Worker } from "tesseract.js";
+import { createWorker, OEM, Worker } from "tesseract.js";
 import OCR from "./ocr";
 
 export default class TesseractOCR implements OCR {
-    useWorker = async (worker: Worker, imgPath: string): Promise<string> => {
+    private useWorker = async (worker: Worker, imgPath: string): Promise<string> => {
         await worker.load();
-        await worker.loadLanguage("es");
-        await worker.initialize("es");
-        const { data: { text } } = await worker.recognize(imgPath);
+        await worker.loadLanguage("spa");
+        await worker.initialize("spa");
+        await worker.setParameters({
+            preserve_interword_spaces: "1",
+            // tessedit_char_whitelist: " ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789,.€()/áéíóúýÁÉÍÓÚÝàèìòùÀÈÌÒÙãñõÃÑÕâêîôûÂÊÎÔÛäëïöüÿÄËÏÖÜŸ"
+        })
+        const { data } = await worker.recognize(imgPath);
+        console.log("OCR RESULT", data)
         await worker.terminate();
-        return text;
+        return data.text;
     };
 
     parseImage(imgPath: string): Promise<string> {
